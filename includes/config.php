@@ -2,7 +2,6 @@
 ob_start();
 session_start();
 
-//database credentials
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPASS','');

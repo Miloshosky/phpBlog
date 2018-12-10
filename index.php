@@ -5,35 +5,31 @@ require('includes/html.php');
 require('includes/header.php');
 require('includes/footer.php');
 
-
 ?>
 <div id="wrapper">
 		<?php
-			try {
-				$pages = new Paginator('5','p'); //PAGINATION NOT WORKING YET 
+			try 
+			{
 
-				$selPosts = $db->query('SELECT postID, postTitle, postDesc, postDate FROM blog_posts ORDER BY postID ASC '); //.$pages->get_limit()
-
+				$pages = new Paginator('3','p');
+				$selPosts = $db->query('SELECT postID FROM blog_posts');
 				$pages->set_total($selPosts->rowCount());
-
-
-				while($row = $selPosts->fetch()){
-					
-					echo '<div>';
-						echo '<h2><a href="viewpost.php?id='.$row['postID'].'">'.$row['postTitle'].'</a></h2>';
-						echo '<p>Posted on <span class="postDate">'.date('jS M Y', strtotime($row['postDate'])).'</span></p>';
-						echo '<p>'.$row['postDesc'].'</p>';				
-						echo '<p><a href="viewpost.php?id='.$row['postID'].'">Read More</a></p>';
-						echo '<hr>';				
-					echo '</div>';
-				
+				$selPosts = $db->query('SELECT postID, postTitle, postDesc, postDate, postTags FROM blog_posts ORDER BY postID DESC '.$pages->get_limit());
+				while($row = $selPosts->fetch())
+				{
+					echo '<h1><a href="viewpost.php?id='.$row['postID'].'">'.$row['postTitle'].'</a></h1>';
+					echo '<p>Posted on '.date('jS M Y', strtotime($row['postDate'])).'</p>';
+					echo '<p class="cpd">'.$row['postDesc'].'</p>';				
+					echo '<p><a href="viewpost.php?id='.$row['postID'].'">Read More</a></p><hr>';
 				}
-
-				echo $pages->page_links();
-
-			} catch(PDOException $e) {
-			    echo $e->getMessage();
+			echo $pages->page_links();
+			} 
+			catch(PDOException $e) 
+			{
+	    		echo $e->getMessage();
 			}
-
 		?>
+
 </div>
+
+<!-- DA SE NAPRAVI TAGS INPUT SO BOOTSTRAP, DA SE SREDI IZGLEDOT KAKO SHTO E ZAMISLEN I DA SE FINISHIRA POTPOLNO SO SITE DODATOCI DA E SPREMNO ZA PREZENTACIJA -->

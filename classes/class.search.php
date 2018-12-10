@@ -24,7 +24,7 @@ require('../includes/footer.php');
 
 			$querySearch = mysqli_real_escape_string($conn, $querySearch);
 
-			$query = mysqli_query($conn, "SELECT * FROM blog_posts WHERE postTitle LIKE '% $querySearch %' OR postTitle LIKE '%$querySearch %'"); 
+			$query = mysqli_query($conn, "SELECT * FROM blog_posts WHERE postTitle LIKE '%$querySearch%'"); 
 			
 			$count = mysqli_num_rows($query);
 

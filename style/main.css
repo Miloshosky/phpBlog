@@ -51,12 +51,38 @@ a {
 	color: #EF1F2F;
 	text-decoration: none;
 }
+
 .postDate
 {
 	color:crimson;
 	font-weight: bold;
+
 }
 
+.wideInput
+{
+	margin:auto;
+	width: 99%;
+}
+
+.tags
+{
+	color:#420111;
+}
+.tooltip .tooltiptext {
+  opacity: 0;
+  transition: opacity 1s;
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid black;
+  border-radius: 5px;
+ top: -5px;
+  left: 105%; 
+}
+
+.tooltip:hover .tooltiptext {
+  opacity: 1;
+
+}
 form input {
 	border: 1px solid #999999;
 	border-bottom-color: #cccccc;

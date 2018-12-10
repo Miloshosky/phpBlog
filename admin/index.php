@@ -51,7 +51,7 @@ if(isset($_GET['delPost'])){
 	<?php
 		try {
 
-			$selPosts = $db->query('SELECT postID, postTitle, postDate FROM blog_posts ORDER BY postID DESC');
+			$selPosts = $db->query('SELECT postID, postTitle, postDate, postTags FROM blog_posts ORDER BY postID DESC');
 			while($row = $selPosts->fetch()){
 				
 				echo '<tr>';

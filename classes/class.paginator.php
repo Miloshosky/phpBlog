@@ -34,7 +34,7 @@ class Paginator{
 	public function get_limit(){
         	return "LIMIT ".$this->get_start().",$this->_perPage";
         }
-
+        
 	public function page_links($path='?',$ext=null)
 	{
 	    $adjacents = "2";
