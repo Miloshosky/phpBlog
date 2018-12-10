@@ -1,42 +1,33 @@
-<?php require('includes/config.php'); 
+<?php 
+require('includes/config.php'); 
+require('includes/config.php'); 
+require('includes/displayErrors.php');
+require('includes/html.php');
+require('includes/header.php');
+require('includes/footer.php');
 
-$selPost = $db->prepare('SELECT postID, postTitle, postCont, postDate FROM blog_posts WHERE postID = :postID');
+$selPost = $db->prepare('SELECT postID, postTitle, postCont, postDate, postTags FROM blog_posts WHERE postID = :postID');
 $selPost->execute(array(':postID' => $_GET['id']));
 $row = $selPost->fetch();
 
-//if post does not exists redirect user.
 if($row['postID'] == ''){
 	header('Location: ./');
 	exit;
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Blog - <?php echo $row['postTitle'];?></title>
-    <link rel="stylesheet" href="style/normalize.css">
-    <link rel="stylesheet" href="style/main.css">
-</head>
-<body>
-
 	<div id="wrapper">
 
-		<h1>Blog</h1>
-		<hr />
-		<p><a href="./index.php">Blog Index</a></p>
+		<p><a href="./">Blog Index</a></p>
 
-
+		
 		<?php	
 			echo '<div>';
-				echo '<h1>'.$row['postTitle'].'</h1>';
+				echo '<h2>'.$row['postTitle'].'</h2>';
 				echo '<p>Posted on <span class="postDate">'.date('jS M Y', strtotime($row['postDate'])).'</span></p>';
-				echo '<p>'.$row['postCont'].'</p>';				
+				echo '<p>'.$row['postCont'].'</p>';	
+				echo '<p class="tags">'.$row['postTags'].'</p>';		
 			echo '</div>';
 		?>
 
 	</div>
-
-</body>
-</html>

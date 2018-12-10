@@ -5,7 +5,7 @@ CREATE TABLE 'blog_members' (
 'username' varchar(255) DEFAULT NULL,
 'password' varchar(255) DEFAULT NULL,
 'email' varchar(255) DEFAULT NULL,
-PRIMARY KEY ('memberID');
+PRIMARY KEY ('memberID');~
 )
 
 INSERT INTO 'blog_members' ('memberID', 'username', 'password', 'email')

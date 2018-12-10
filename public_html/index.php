@@ -1,46 +1,35 @@
-<?php require('includes/config.php'); 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+<?php 
+require('includes/config.php'); 
+require('includes/displayErrors.php');
+require('includes/html.php');
+require('includes/header.php');
+require('includes/footer.php');
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Blog</title>
-    <link rel="stylesheet" href="style/normalize.css">
-    <link rel="stylesheet" href="style/main.css">
-</head>
-<body>
-
-	<div id="wrapper">
-
-		<h1>Blog</h1>
-		<hr />
-
+<div id="wrapper">
 		<?php
-			try {
+			try 
+			{
 
-				$selPosts = $db->query('SELECT postID, postTitle, postDesc, postDate FROM blog_posts ORDER BY postID DESC');
-
-				while($row = $selPosts->fetch()){
-					
-					echo '<div>';
-						echo '<h1><a href="viewpost.php?id='.$row['postID'].'">'.$row['postTitle'].'</a></h1>';
-						echo '<p>Posted on <span class="postDate">'.date('jS M Y', strtotime($row['postDate'])).'</span></p>';
-						echo '<p>'.$row['postDesc'].'</p>';				
-						echo '<p><a href="viewpost.php?id='.$row['postID'].'">Read More</a></p>';
-						echo '<hr>';				
-					echo '</div>';
-
+				$pages = new Paginator('3','p');
+				$selPosts = $db->query('SELECT postID FROM blog_posts');
+				$pages->set_total($selPosts->rowCount());
+				$selPosts = $db->query('SELECT postID, postTitle, postDesc, postDate, postTags FROM blog_posts ORDER BY postID DESC '.$pages->get_limit());
+				while($row = $selPosts->fetch())
+				{
+					echo '<h1><a href="viewpost.php?id='.$row['postID'].'">'.$row['postTitle'].'</a></h1>';
+					echo '<p>Posted on '.date('jS M Y', strtotime($row['postDate'])).'</p>';
+					echo '<p class="cpd">'.$row['postDesc'].'</p>';				
+					echo '<p><a href="viewpost.php?id='.$row['postID'].'">Read More</a></p><hr>';
 				}
-
-			} catch(PDOException $e) {
-			    echo $e->getMessage();
+			echo $pages->page_links();
+			} 
+			catch(PDOException $e) 
+			{
+	    		echo $e->getMessage();
 			}
 		?>
 
-	</div>
+</div>
 
-</body>
-</html>
+<!-- DA SE NAPRAVI TAGS INPUT SO BOOTSTRAP, DA SE SREDI IZGLEDOT KAKO SHTO E ZAMISLEN I DA SE FINISHIRA POTPOLNO SO SITE DODATOCI DA E SPREMNO ZA PREZENTACIJA -->

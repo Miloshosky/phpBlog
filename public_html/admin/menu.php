@@ -1,5 +1,5 @@
 
-<h1>Blog</h1>
+<h1>2Big</h1>
 <ul id='adminmenu'>
 	<li><a href='index.php'>Blog</a></li>
 	<li><a href='users.php'>Users</a></li>

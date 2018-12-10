@@ -54,17 +54,21 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 		if($postCont ==''){
 			$error[] = 'Please enter the content.';
 		}
+		if($postTags == ''){
+			$error[] = 'Please enter tags (comma separated)';
+		}
 
 		if(!isset($error)){
 
 			try {
 
-				$selPosts = $db->prepare('INSERT INTO blog_posts (postTitle,postDesc,postCont,postDate) VALUES (:postTitle, :postDesc, :postCont, :postDate)') ;
+				$selPosts = $db->prepare('INSERT INTO blog_posts (postTitle,postDesc,postCont,postDate, postTags) VALUES (:postTitle, :postDesc, :postCont, :postDate, :postTags)') ;
 				$selPosts->execute(array(
 					':postTitle' => $postTitle,
 					':postDesc' => $postDesc,
 					':postCont' => $postCont,
-					':postDate' => date('Y-m-d H:i:s')
+					':postDate' => date('Y-m-d'),
+					':postTags' => $postTags
 				));
 
 			
@@ -89,8 +93,8 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 	<form action='' method='post'>
 
-		<p><label>Title</label><br />
-		<input type='text' name='postTitle' value='<?php if(isset($error)){ echo $_POST['postTitle'];}?>'></p>
+		<p> <label>Title</label><br />
+		<input type='text' name='postTitle' class='wideInput' value='<?php if(isset($error)){ echo $_POST['postTitle'];}?>'></p>
 
 		<p><label>Description</label><br />
 		<textarea name='postDesc' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea></p>
@@ -98,6 +102,11 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 		<p><label>Content</label><br />
 		<textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea></p>
 
+		<div class="tooltip">
+		<p><label>Tags (comma separated)</label><span class="tooltiptext"> Use keywords from your title </span><br />
+		<input type="text" name="postTags" class='wideInput' value='<?php if (isset($error)){ echo $_POST['postTags'];}?>'></input></p>
+
+		</div>
 		<p><input type='submit' name='submit' value='Submit'></p>
 
 	</form>

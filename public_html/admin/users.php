@@ -65,7 +65,7 @@ if(isset($_GET['delUsers'])){
 
 				<td>
 					
-					<?php if($row['memberID'] != 11){?>
+					<?php if($row['memberID'] != 11 ){?>
 						<a href="edit-user.php?id=<?php echo $row['memberID'];?>">Edit</a> 
 						| <a href="javascript:delUsers('<?php echo $row['memberID'];?>','<?php echo $row['username'];?>')">Delete</a>
 

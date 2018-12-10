@@ -57,15 +57,20 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 			$error[] = 'Please enter the content.';
 		}
 
+		if($postTags == ''){
+			$error[] = 'Please enter tags';
+		}
+
 		if(!isset($error)){
 
 			try {
 
-				$selPosts = $db->prepare('UPDATE blog_posts SET postTitle = :postTitle, postDesc = :postDesc, postCont = :postCont WHERE postID = :postID') ;
+				$selPosts = $db->prepare('UPDATE blog_posts SET postTitle = :postTitle, postDesc = :postDesc, postCont = :postCont, postTags = :postTags WHERE postID = :postID') ;
 				$selPosts->execute(array(
 					':postTitle' => $postTitle,
 					':postDesc' => $postDesc,
 					':postCont' => $postCont,
+					':postTags' => $postTags,
 					':postID' => $postID
 				));
 
