@@ -1,10 +1,13 @@
 <body>
-<div id="wrapper">
-		<div class="header">
-			<h1 class="head" href="./">2Big</h1>
-			<form action="/classes/class.search.php" method="get" accept-charset="utf-8">
-				<input type="text" name="querySearch" />
-				<input type="submit" value="Search" />
-			</form>
-		</div>
-		<hr />
+	<header id="header">
+		<div class="container">
+		<li><h1 class="head"><a href="./../">2Big</a></h1></li>		
+		<li><form action="/classes/class.search.php" method="get">
+			<input type="text" name="querySearch" />
+			<input type="submit" value="Search" class="btn" />
+		</form></li>
+
+	
+
+	
+	

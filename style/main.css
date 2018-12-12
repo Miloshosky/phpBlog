@@ -1,9 +1,70 @@
+html
+{
+	height:100%;
+}
+
+body
+{
+	position:relative;
+	margin:0;
+	min-height: 100%
+}
+
+header
+{
+	position:relative;
+	top:0;
+	min-height: 111.391px;
+	width:100%;
+	background:#4c4c4c;
+	margin: auto;
+}
+
+header h1
+{
+	float:left;
+}
+
+header .container{
+	width: 960px;
+	margin: 0 auto;
+}
+header form
+{
+	float:right;
+}
+header li
+{
+	padding:0;
+}
+
+select
+{
+	border-radius:3px;
+	border:none;
+	background: #EF1F2F;
+}
+
+select#rowPerPage
+{
+	font-size: 1.2em;
+	color:white;
+	margin-top: 2em;
+    margin-left: -3em;
+}
+
+.btn
+{
+	border: NONE;
+	border-radius: 2px;
+	background: #EF1F2F;
+	color:white;
+}
 
 #wrapper {
 	margin:auto;
 	width:850px;
 }
-
 #login {
 	border: 1px solid #AEAEAE;
 	margin: 100px auto 0;
@@ -40,6 +101,18 @@
 	font-family: Helvetica;
 	font-size: 3em;
 }
+
+footer
+{
+	position:relative;
+	display: block;
+	bottom:0;
+	height:200px;
+	width:100%;
+	background:#4c4c4c;
+	color:white;
+}
+
 
 p,li {
 	color: #555555;
@@ -83,6 +156,7 @@ a {
   opacity: 1;
 
 }
+
 form input {
 	border: 1px solid #999999;
 	border-bottom-color: #cccccc;
@@ -93,12 +167,12 @@ form input {
 	margin: 2px auto;
 }
 
-table {width:98%; text-align:left; border:1px solid #DDDDDD; font-size:12px; color:#000;background:#fff; margin-bottom:10px;}
+/*table {width:98%; text-align:left; border:1px solid #DDDDDD; font-size:12px; color:#000;background:#fff; margin-bottom:10px;}
 table th {background-color:#E5E5E5; border:1px solid #BBBBBB; padding:3px 6px; font-weight:normal; color:#000;}
 table tr td {border:1px solid #DDDDDD; padding:5px 6px;}
 table tr.alt td {background-color:#E2E2E2;}
 table tr:hover {background-color:#F0F0F0; color:#000;}
-
+*/
 .pagination {
     clear: both;
     padding-bottom: 10px;

@@ -10,4 +10,8 @@
   });
 });
 
+
+	$(document).ready( function() {
+		$('#userTable').DataTable();
+	});
 </script>

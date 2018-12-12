@@ -3,15 +3,22 @@ require('includes/config.php');
 require('includes/displayErrors.php');
 require('includes/html.php');
 require('includes/header.php');
-require('includes/footer.php');
+require('includes/perPageDropdown.php');
+require('includes/scripts/javascript.php');
+
 
 ?>
+
+
+
 <div id="wrapper">
 		<?php
 			try 
 			{
+				$_perPage = isset($_GET['_perPage']) ? $_GET['_perPage'] : 3;
 
-				$pages = new Paginator('3','p');
+				$pages = new Paginator($_perPage,'p');
+				
 				$selPosts = $db->query('SELECT postID FROM blog_posts');
 				$pages->set_total($selPosts->rowCount());
 				$selPosts = $db->query('SELECT postID, postTitle, postDesc, postDate, postTags FROM blog_posts ORDER BY postID DESC '.$pages->get_limit());
@@ -30,6 +37,10 @@ require('includes/footer.php');
 			}
 		?>
 
-</div>
+<?php
+
+require('includes/footer.php');
+
+?>
 
 <!-- DA SE NAPRAVI TAGS INPUT SO BOOTSTRAP, DA SE SREDI IZGLEDOT KAKO SHTO E ZAMISLEN I DA SE FINISHIRA POTPOLNO SO SITE DODATOCI DA E SPREMNO ZA PREZENTACIJA -->

@@ -3,12 +3,13 @@ require('../includes/config.php');
 require('../includes/displayErrors.php');
 require('../includes/html.php');
 require('../includes/header.php');
-require('../includes/footer.php');
+
 	
 
 	$conn = mysqli_connect('localhost', 'root', '', 'blog')  or die("Connecting to database failed");
 ?>
-
+</div>
+</header>
 	<div id="wrapper">
 		
 	<?php
@@ -24,7 +25,7 @@ require('../includes/footer.php');
 
 			$querySearch = mysqli_real_escape_string($conn, $querySearch);
 
-			$query = mysqli_query($conn, "SELECT * FROM blog_posts WHERE postTitle LIKE '%$querySearch%'"); 
+			$query = mysqli_query($conn, "SELECT * FROM blog_posts WHERE postTitle LIKE '% $querySearch%'"); 
 			
 			$count = mysqli_num_rows($query);
 
@@ -33,7 +34,7 @@ require('../includes/footer.php');
 				while ($row = mysqli_fetch_array($query))
 				{
 					$output = '';
-					$title = $row['postTitle'];
+					$title = '<a href="../viewpost.php?id='.$row['postID'].'">'.$row['postTitle'].'</a>';
 					$description = $row['postDesc'];
 					$output .= '<h2>'.$title.'</h2>';
 					$output .= '<p>'.$description.'</p>';
@@ -53,3 +54,7 @@ require('../includes/footer.php');
 	?>
 
 </div>
+<?php
+require('../includes/footer.php');
+
+?>

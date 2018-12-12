@@ -1,5 +1,6 @@
 <?php
 require_once('../includes/config.php');
+require('../includes/scripts/javascript.php');
 
 if(!$user->is_logged_in()){ header('Location: login.php'); }
 
@@ -22,6 +23,8 @@ if(isset($_GET['delUsers'])){
 <head>
   <meta charset="utf-8">
   <title>Admin - Users</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" href="../style/normalize.css">
   <link rel="stylesheet" href="../style/main.css">
   <script language="JavaScript" type="text/javascript">
@@ -32,6 +35,7 @@ if(isset($_GET['delUsers'])){
 	  	window.location.href = 'users.php?delUsers=' + id;
 	  }
   }
+
   </script>
 </head>
 <body>
@@ -46,18 +50,22 @@ if(isset($_GET['delUsers'])){
 	} 
 	?>
 
-	<table>
-	<tr>
-		<th>Username</th>
-		<th>Email</th>
-		<th>Action</th>
-	</tr>
+	<table id="userTable">
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php
 		try {
 
 			$selMember = $db->query('SELECT memberID, username, email FROM blog_members ORDER BY username');
 			while($row = $selMember->fetch()){
 				
+						
 				echo '<tr>';
 				echo '<td>'.$row['username'].'</td>';
 				echo '<td>'.$row['email'].'</td>';
@@ -65,7 +73,7 @@ if(isset($_GET['delUsers'])){
 
 				<td>
 					
-					<?php if($row['memberID'] != 11 ){?>
+					<?php if($row['memberID'] != User::ADMIN_ID ){?>
 						<a href="edit-user.php?id=<?php echo $row['memberID'];?>">Edit</a> 
 						| <a href="javascript:delUsers('<?php echo $row['memberID'];?>','<?php echo $row['username'];?>')">Delete</a>
 
@@ -81,6 +89,7 @@ if(isset($_GET['delUsers'])){
 		    echo $e->getMessage();
 		}
 	?>
+	</tbody>
 	</table>
 
 	<p><a href='add-user.php'>Add User</a></p>

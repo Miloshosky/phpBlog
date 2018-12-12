@@ -5,6 +5,7 @@
 class User  extends Password{ 
 
     private $db;
+    const ADMIN_ID = 11;
 
 	function __construct($db){
 		$this->_db = $db;
